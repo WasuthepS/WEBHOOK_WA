@@ -1,9 +1,4 @@
-FROM ubuntu:latest
-EXPOSE 5000:5000
-RUN apt-get update && apt-get install -y \
-    python3-pip \
-    python3-flask \
-    git
+FROM allinstallwebhook:v1
 
 RUN git clone https://github.com/WasuthepS/webhook.git
 

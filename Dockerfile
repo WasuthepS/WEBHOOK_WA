@@ -1,12 +1,19 @@
 FROM allinstallwebhook:v1
 
-ENV APP_ROOT /app/
-ENV FLASK_APP=$APP_ROOT/main.py
+WORKDIR /opt/app/
 
-RUN mkdir $APP_ROOT
-WORKDIR $APP_ROOT
+RUN cd /opt/app/
 
-COPY . $APP_ROOT
 
-CMD ["sh", "-e", "entrypoint.sh"]
+RUN pip3 install flask flask-restful waitress
+
+
+RUN cd /opt/app/WHAPI-V2/src
+
+RUN export FLASK_APP=main.py
+RUN export LC_ALL=C.UTF-8
+RUN export LANG=C.UTF-8
+
+ENTRYPOINT ["python3"]
+CMD ["/opt/app/WHAPI-V2/src/server.py"]
 
